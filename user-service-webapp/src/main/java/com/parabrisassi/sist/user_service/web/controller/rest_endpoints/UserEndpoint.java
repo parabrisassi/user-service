@@ -177,9 +177,10 @@ public class UserEndpoint implements ValidationExceptionThrower {
     @Path("{username : .+}")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deleteByUsername(@PathParam("username") final String username) {
-        LOGGER.debug("Removing user with username {}", username);
-        userService.deleteByUsername(username);
-        return Response.noContent().build();
+        return Response.status(Response.Status.METHOD_NOT_ALLOWED).build(); // TODO: enable when decided how to do this
+//        LOGGER.debug("Removing user with username {}", username);
+//        userService.deleteByUsername(username);
+//        return Response.noContent().build();
     }
 
 
