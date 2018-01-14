@@ -12,7 +12,7 @@ import java.util.Optional;
  */
 public interface UserCredentialDao extends ExtendedJpaRepository<UserCredential, Long> {
 
-    @Query("SELECT uc FROM UserCredential uc WHERE uc.user = :#{#user} " +
-            "AND uc.createdAt = (SELECT MAX(aux.createdAt) FROM UserCredential aux WHERE aux.user = :#{#user})")
+    @Query("SELECT uc FROM UserCredential uc WHERE uc.user = :user " +
+            "AND uc.createdAt = (SELECT MAX(aux.createdAt) FROM UserCredential aux WHERE aux.user = :user)")
     Optional<UserCredential> findActualByUser(User user);
 }
