@@ -16,7 +16,7 @@ import java.util.Collection;
 /**
  * Jersey configuration class. An extension of {@link ResourceConfig} that is declared as a Spring component.
  */
-@Component
+//@Component
 /* package */ class JerseyConfig extends ResourceConfig {
 
 

@@ -71,6 +71,18 @@
             <artifactId>spring-tx</artifactId>
         </dependency>
 
+        <!-- OAuth2 stuff -->
+        <!-- Spring Security OAuth2 -->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+        </dependency>
+        <!-- Spring Security JWT -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+        </dependency>
+
 
         <!-- Database -->
         <dependency>
@@ -86,12 +98,6 @@
         <dependency>
             <groupId>com.bellotapps.utils</groupId>
             <artifactId>error-handler</artifactId>
-        </dependency>
-
-        <!-- JSON Web Tokens-->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
         </dependency>
 
     </dependencies>
