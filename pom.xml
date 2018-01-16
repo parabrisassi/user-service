@@ -64,12 +64,6 @@
                 <version>${org.flywaydb.version}</version>
             </dependency>
 
-            <!-- Apache Commons IO -->
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>${apache-commons-io.version}</version>
-            </dependency>
             <!-- Apache Commons Validator -->
             <dependency>
                 <groupId>commons-validator</groupId>
