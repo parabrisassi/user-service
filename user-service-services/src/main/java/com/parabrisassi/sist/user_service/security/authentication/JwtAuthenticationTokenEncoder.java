@@ -7,6 +7,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,9 +27,14 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
     private final static String ROLES_CLAIM_NAME = "roles";
 
     /**
-     * The secret key used to sign the tokens, encoded in base 64.
+     * The private key used to sign tokens.
      */
-    private final String base64EncodedSecretKey;
+    private final PrivateKey privateKey;
+
+    /**
+     * The public key used to verify tokens.
+     */
+    private final PublicKey publicKey;
 
     /**
      * The duration of tokens, in milliseconds.
@@ -37,14 +49,23 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
     /**
      * Constructor.
      *
-     * @param secretKey The secret key used to sign the tokens
-     * @param duration  The duration of tokens, in seconds
+     * @param privateKeyString The private key (base64 encoded) used to sign the tokens.
+     * @param publicKeyString  The public key (base64 encoded) used to verify tokens.
+     * @param duration         The duration of tokens, in seconds.
      */
-    /* package */ JwtAuthenticationTokenEncoder(@Value("${custom.security.jwt.signing-key}") String secretKey,
-                                                @Value("${custom.security.jwt.duration}") Long duration) {
-        this.base64EncodedSecretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    /* package */ JwtAuthenticationTokenEncoder(@Value("${custom.security.jwt.key.private}") String privateKeyString,
+                                                @Value("${custom.security.jwt.key.public}") String publicKeyString,
+                                                @Value("${custom.security.jwt.duration}") Long duration)
+            throws NoSuchAlgorithmException, InvalidKeySpecException {
         this.duration = duration * 1000;
-        this.signatureAlgorithm = SignatureAlgorithm.HS512;
+        this.signatureAlgorithm = SignatureAlgorithm.RS512;
+
+        final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKeyString));
+        final X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(publicKeyString));
+
+        this.privateKey = keyFactory.generatePrivate(keySpecPKCS8);
+        this.publicKey = keyFactory.generatePublic(keySpecX509);
     }
 
     @Override
@@ -61,7 +82,7 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
                 .setClaims(claims)
                 .setIssuedAt(Date.from(now))
                 .setExpiration(Date.from(now.plusMillis(duration)))
-                .signWith(signatureAlgorithm, base64EncodedSecretKey)
+                .signWith(signatureAlgorithm, privateKey)
                 .compact();
     }
 
@@ -72,7 +93,7 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
         }
         try {
             final Claims claims = Jwts.parser()
-                    .setSigningKey(base64EncodedSecretKey)
+                    .setSigningKey(publicKey)
                     .parse(encodedToken, CustomJwtHandlerAdapter.getInstance())
                     .getBody();
 

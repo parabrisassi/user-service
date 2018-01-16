@@ -6,9 +6,14 @@
       "description": "Description for custom.rolling-policy.max-history."
     },
     {
-      "name": "custom.security.jwt.signing-key",
+      "name": "custom.security.jwt.key.public",
       "type": "java.lang.String",
-      "description": "Secret key to sign JWTs."
+      "description": "Public key to verify JWTs. signatures."
+    },
+    {
+      "name": "custom.security.jwt.key.private",
+      "type": "java.lang.String",
+      "description": "Private key to sign JWTs."
     },
     {
       "name": "custom.security.jwt.duration",
