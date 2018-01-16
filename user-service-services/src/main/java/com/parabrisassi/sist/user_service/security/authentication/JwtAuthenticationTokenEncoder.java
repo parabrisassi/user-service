@@ -5,6 +5,7 @@ import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Base64Utils;
 import org.springframework.util.StringUtils;
 
 import java.security.KeyFactory;
@@ -61,8 +62,9 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
         this.signatureAlgorithm = SignatureAlgorithm.RS512;
 
         final KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-        final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64.getDecoder().decode(privateKeyString));
-        final X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.getDecoder().decode(publicKeyString));
+
+        final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(Base64Utils.decodeFromString(privateKeyString));
+        final X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64Utils.decodeFromString(publicKeyString));
 
         this.privateKey = keyFactory.generatePrivate(keySpecPKCS8);
         this.publicKey = keyFactory.generatePublic(keySpecX509);
