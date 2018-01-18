@@ -94,7 +94,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements I
      */
     private RequestMatcher tokenValidationMatcher() {
         return new RegexRequestMatcher(jerseyApplicationPath +
-                AuthenticationTokenEndpoint.TOKENS_ENDPOINT + "/.+", "GET");
+                AuthenticationTokenEndpoint.TOKENS_ENDPOINT + "/.+" +
+                "\\?" + AuthenticationTokenEndpoint.TOKENS_OWNER_QUERY_PARAM + "=.*", "GET");
     }
 
     /**

@@ -18,6 +18,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -38,12 +40,20 @@ public class AuthenticationTokenEndpoint {
      */
     public static final String TOKENS_ENDPOINT = "/tokens";
 
+    /**
+     * Indicates the query param through which the username is indicated when validating a token.
+     */
+    public static final String TOKENS_OWNER_QUERY_PARAM = "username";
+
 
     /**
      * The {@link Logger} object.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(UserEndpoint.class);
 
+    /**
+     * Service in charge of managing authentication tokens.
+     */
     private final AuthenticationTokenService authenticationTokenService;
 
     @Context
@@ -75,10 +85,21 @@ public class AuthenticationTokenEndpoint {
 
     @GET
     @Path("{tokenId : .+}")
-    public Response validateToken(@PathParam("tokenId") @Base64url final Long tokenId) {
-        validateTokenId(tokenId);
+    public Response validateToken(@PathParam("tokenId") @Base64url final Long tokenId,
+                                  @QueryParam(TOKENS_OWNER_QUERY_PARAM) final String username) {
+        final List<String> invalidParams = new LinkedList<>();
+        if (tokenId == null) {
+            invalidParams.add("tokenId");
+        }
+        if (username == null) {
+            invalidParams.add("username");
+        }
+        if (!invalidParams.isEmpty()) {
+            throw new IllegalParamValueException(invalidParams);
+        }
         LOGGER.debug("Validating authentication token with id {}", tokenId);
-        return Optional.of(authenticationTokenService.isValidToken(tokenId))
+        //noinspection ConstantConditions  Previous statements would have thrown exception in case of null tokenId
+        return Optional.of(authenticationTokenService.isValidToken(tokenId, username))
                 .filter(Boolean::booleanValue)
                 .map(flag -> Response.noContent())
                 .orElse(Response.status(Response.Status.NOT_FOUND))
@@ -89,21 +110,11 @@ public class AuthenticationTokenEndpoint {
     @DELETE
     @Path("{tokenId : .+}")
     public Response blacklistToken(@PathParam("tokenId") @Base64url final Long tokenId) {
-        validateTokenId(tokenId);
-        LOGGER.debug("Blacklisting authentication token with id {}", tokenId);
-        authenticationTokenService.blacklistToken(tokenId);
-        return Response.noContent().build();
-    }
-
-    /**
-     * Validates the given {@code tokenId}, throwing an {@link IllegalParamValueException} in case it does not validate.
-     *
-     * @param tokenId The token id to be validated.
-     * @throws IllegalParamValueException If the token id is not valid.
-     */
-    private void validateTokenId(final Long tokenId) throws IllegalParamValueException {
         if (tokenId == null) {
             throw new IllegalParamValueException(Collections.singletonList("tokenId"));
         }
+        LOGGER.debug("Blacklisting authentication token with id {}", tokenId);
+        authenticationTokenService.blacklistToken(tokenId);
+        return Response.noContent().build();
     }
 }
