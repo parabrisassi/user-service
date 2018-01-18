@@ -98,7 +98,7 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
 
     @Override
     @Transactional
-    public String createToken(String username, String password) {
+    public TokenWrapper createToken(String username, String password) {
         validateTokenCreationArguments(username, password);
         final User user = userDao.findByUsername(username)
                 .orElseThrow(() -> new InvalidCredentialsException("Unknown user"));
@@ -109,7 +109,8 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
         final TokenData tokenData = new TokenData(token.getId(),
                 token.getUser().getUsername(),
                 token.getUser().getRoles());
-        return authenticationTokenEncoder.encode(tokenData);
+
+        return new TokenWrapper(tokenData.getId(), authenticationTokenEncoder.encode(tokenData));
     }
 
     @Override

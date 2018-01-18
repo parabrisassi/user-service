@@ -60,16 +60,15 @@ public class AuthenticationTokenEndpoint {
             throw new MissingJsonException();
         }
         LOGGER.debug("Issuing a new token for user {}", credentialsDto.getUsername());
-        final String rawToken = authenticationTokenService
-                .createToken(credentialsDto.getUsername(), credentialsDto.getPassword());
+        final AuthenticationTokenService.TokenWrapper tokenWrapper =
+                authenticationTokenService.createToken(credentialsDto.getUsername(), credentialsDto.getPassword());
         LOGGER.debug("User {} successfully logged in", credentialsDto.getUsername());
-        final long tokenId = authenticationTokenService.fromEncodedToken(rawToken).getId();
         final URI tokenUri = uriInfo.getBaseUriBuilder()
                 .path(TOKENS_ENDPOINT)
-                .path(Base64Utils.encodeToUrlSafeString(Long.toString(tokenId).getBytes()))
+                .path(Base64Utils.encodeToUrlSafeString(Long.toString(tokenWrapper.getId()).getBytes()))
                 .build();
         return Response.created(tokenUri)
-                .header(TOKEN_HEADER, rawToken)
+                .header(TOKEN_HEADER, tokenWrapper.getRawToken())
                 .build();
 
     }
