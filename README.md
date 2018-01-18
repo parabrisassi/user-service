@@ -1,4 +1,4 @@
-# user-service
+# User service [![Build Status](https://travis-ci.org/parabrisassi/user-service.svg?branch=master)](https://travis-ci.org/parabrisassi/user-service)
 
 Service in charge of managing users, together with authentication and authorization
 
