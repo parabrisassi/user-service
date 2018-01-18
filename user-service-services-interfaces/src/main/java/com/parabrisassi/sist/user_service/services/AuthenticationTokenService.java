@@ -35,7 +35,7 @@ public interface AuthenticationTokenService {
      * @param password The {@link com.parabrisassi.sist.user_service.models.User}'s password
      * @return The created {@link AuthenticationToken}.
      */
-    String createToken(String username, String password);
+    TokenWrapper createToken(String username, String password);
 
     /**
      * Retrieves an {@link AuthenticationToken} from a {@link String} representation of it.
@@ -110,6 +110,47 @@ public interface AuthenticationTokenService {
          */
         public List<Role> getRoles() {
             return roles;
+        }
+    }
+
+    /**
+     * Class wrapping a raw token (i.e a {@link String} representation of it), together with its id.
+     */
+    final class TokenWrapper {
+
+        /**
+         * The token id.
+         */
+        private final long id;
+
+        /**
+         * The raw token (i.e a {@link String} representation of it).
+         */
+        private final String rawToken;
+
+        /**
+         * Constructor.
+         *
+         * @param id       The token id.
+         * @param rawToken The raw token (i.e a {@link String} representation of it).
+         */
+        public TokenWrapper(long id, String rawToken) {
+            this.id = id;
+            this.rawToken = rawToken;
+        }
+
+        /**
+         * @return The token id.
+         */
+        public long getId() {
+            return id;
+        }
+
+        /**
+         * @return The raw token (i.e a {@link String} representation of it).
+         */
+        public String getRawToken() {
+            return rawToken;
         }
     }
 
