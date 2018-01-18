@@ -19,7 +19,7 @@ import static com.parabrisassi.sist.user_service.security.authentication.Passwor
 import static com.parabrisassi.sist.user_service.security.authentication.PasswordValidatorImpl.MIN_PASSWORD_LENGTH;
 
 /**
- *
+ * Test for {@link PasswordValidatorImpl} class.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = TestConfig.class)
@@ -29,9 +29,6 @@ public class PasswordValidationImplTest {
     private final static String LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
     private final static String NUMBERS = "0123456789";
     private final static String SPECIAL_CHARACTERS = "~`!@#$%^&*()-_=+[{]}\\|;:\'\",<.>/?";
-
-
-//    private final static String VALID_PASSWORD = ".MoThër-FÚcker123_%@$";
 
     @Autowired
     private PasswordValidatorImpl passwordValidator;
