@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.security.SecureRandom;
@@ -23,6 +24,10 @@ import static com.parabrisassi.sist.user_service.security.authentication.Passwor
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = TestConfig.class)
+@TestPropertySource(locations = {
+        "classpath:properties/commons.properties",
+        "classpath:properties/security/authentication/password_validation_impl_test.properties",
+})
 public class PasswordValidationImplTest {
 
     private final static String UPPERCASE_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
