@@ -3,7 +3,7 @@ package com.parabrisassi.sist.user_service.web.controller.dtos.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.parabrisassi.sist.user_service.models.Role;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService.TokenData;
-import org.springframework.util.Base64Utils;
+import com.parabrisassi.sist.user_service.web.support.data_transfer.Base64UrlHelper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,7 +25,7 @@ public final class TokenDataDto {
      * @param token The token from where data is taken.
      */
     public TokenDataDto(TokenData token) {
-        this.id = Base64Utils.encodeToUrlSafeString(Long.toString(token.getId()).getBytes());
+        this.id = Base64UrlHelper.encodeFromNumber(token.getId(), Object::toString);
         this.roles = new LinkedList<>(token.getRoles());
     }
 }

@@ -4,12 +4,12 @@ import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
 import com.parabrisassi.sist.user_service.web.controller.dtos.authentication.CredentialsDto;
 import com.parabrisassi.sist.user_service.web.support.annotations.Base64url;
 import com.parabrisassi.sist.user_service.web.support.annotations.JerseyController;
+import com.parabrisassi.sist.user_service.web.support.data_transfer.Base64UrlHelper;
 import com.parabrisassi.sist.user_service.web.support.exceptions.IllegalParamValueException;
 import com.parabrisassi.sist.user_service.web.support.exceptions.MissingJsonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Base64Utils;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -75,7 +75,7 @@ public class AuthenticationTokenEndpoint {
         LOGGER.debug("User {} successfully logged in", credentialsDto.getUsername());
         final URI tokenUri = uriInfo.getBaseUriBuilder()
                 .path(TOKENS_ENDPOINT)
-                .path(Base64Utils.encodeToUrlSafeString(Long.toString(tokenWrapper.getId()).getBytes()))
+                .path(Base64UrlHelper.encodeFromNumber(tokenWrapper.getId(), Object::toString))
                 .build();
         return Response.created(tokenUri)
                 .header(TOKEN_HEADER, tokenWrapper.getRawToken())
