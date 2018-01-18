@@ -23,7 +23,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -101,7 +104,7 @@ public class UserEndpoint implements ValidationExceptionThrower {
                     return userService.register(userDto.getUsername(), userDto.getPassword());
                 })
                 .map(user -> Response
-                        .created(uriInfo.getAbsolutePathBuilder().path(String.valueOf(user.getId())).build())
+                        .created(uriInfo.getAbsolutePathBuilder().path(user.getUsername()).build())
                         .build())
                 .orElseThrow(MissingJsonException::new);
     }
@@ -212,7 +215,7 @@ public class UserEndpoint implements ValidationExceptionThrower {
     private static URI getLocationUri(User user, UriInfo uriInfo) {
         return uriInfo.getBaseUriBuilder().clone()
                 .path(USERS_ENDPOINT)
-                .path(Long.toString(user.getId()))
+                .path(user.getUsername())
                 .build();
     }
 
