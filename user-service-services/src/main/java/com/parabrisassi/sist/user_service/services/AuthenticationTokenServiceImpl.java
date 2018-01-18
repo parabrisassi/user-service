@@ -9,6 +9,7 @@ import com.parabrisassi.sist.user_service.exceptions.ValidationException;
 import com.parabrisassi.sist.user_service.models.AuthenticationToken;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.models.UserCredential;
+import com.parabrisassi.sist.user_service.models.constants.ValidationErrorConstants;
 import com.parabrisassi.sist.user_service.persistence.daos.AuthenticationTokenDao;
 import com.parabrisassi.sist.user_service.persistence.daos.UserCredentialDao;
 import com.parabrisassi.sist.user_service.persistence.daos.UserDao;
@@ -22,8 +23,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.security.SecureRandom;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -115,16 +118,22 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
 
     @Override
     public TokenData fromEncodedToken(String encodedToken) {
+        if (encodedToken == null) {
+            throwValidationException(Collections.singletonList(MISSING_ENCODED_TOKEN));
+        }
         final TokenData tokenData = authenticationTokenEncoder.decode(encodedToken);
-        if (!doValidateToken(tokenData.getId())) {
-            throw new TokenException("Blacklisted token");
+        if (!doValidateToken(tokenData.getId(), tokenData.getUsername())) {
+            throw new TokenException("Invalid token");
         }
         return tokenData;
     }
 
     @Override
-    public boolean isValidToken(long id) {
-        return doValidateToken(id);
+    public boolean isValidToken(long id, String username) {
+        if (username == null) {
+            throwValidationException(Collections.singletonList(ValidationErrorConstants.MISSING_USERNAME));
+        }
+        return doValidateToken(id, username);
     }
 
     @Override
@@ -196,18 +205,24 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     }
 
     /**
-     * Validates that an {@link AuthenticationToken} exists with the given {@code tokenId},
-     * and that is valid (i.e not blacklisted).
+     * Performs validation of a token
+     * (i.e exist with the given id, is valid, and belong to the {@link User} with the given {@code username}).
      *
-     * @param tokenId The id of the {@link AuthenticationToken} to be validated.
+     * @param id       The id of the token to be validated.
+     * @param username The username of the {@link User} that must be the owner of the token.
      * @return {@code true} if the token is valid, or {@code false} otherwise.
      */
-    private boolean doValidateToken(long tokenId) {
-        return authenticationTokenDao.findById(tokenId)
-                .map(AuthenticationToken::isValid)
-                .orElse(false);
+    private boolean doValidateToken(long id, String username) {
+        Assert.notNull(username, "The username must not be null");
+        return authenticationTokenDao.findById(id)
+                .filter(AuthenticationToken::isValid)
+                .filter(token -> username.equals(token.getUser().getUsername()))
+                .isPresent();
     }
 
     private static final ValidationError MISSING_PASSWORD = new ValidationError(MISSING_VALUE, "password",
             "The password is missing");
+
+    private static final ValidationError MISSING_ENCODED_TOKEN = new ValidationError(MISSING_VALUE,
+            "encodedToken", "The encoded token is missing");
 }

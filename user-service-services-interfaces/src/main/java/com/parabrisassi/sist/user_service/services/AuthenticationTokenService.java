@@ -42,16 +42,20 @@ public interface AuthenticationTokenService {
      *
      * @param encodedToken The encoded {@link AuthenticationToken}.
      * @return The {@link AuthenticationToken} represented by the given {@link String}.
+     * @throws TokenException In case the token is not valid.
      */
-    TokenData fromEncodedToken(String encodedToken);
+    TokenData fromEncodedToken(String encodedToken) throws TokenException;
 
     /**
-     * Indicates whether an {@link AuthenticationToken} is valid (i.e not blacklisted).
+     * Indicates whether an {@link AuthenticationToken} is valid
+     * (i.e not blacklisted and belonging to the {@link User} with the given {@code username}).
      *
-     * @param id The id of the {@link AuthenticationToken}.
+     * @param id       The id of the {@link AuthenticationToken}.
+     * @param username The username of the user that is performing the request
+     *                 (must be the owner of the token to be valid).
      * @return {@code true} if the {@link AuthenticationToken} is valid, or {@code false} otherwise.
      */
-    boolean isValidToken(long id);
+    boolean isValidToken(long id, String username);
 
     /**
      * Invalidates an {@link AuthenticationToken}.
