@@ -17,14 +17,14 @@ import java.util.List;
 public interface AuthenticationTokenService {
 
     /**
-     * Retrieves a {@link Page} of {@link AuthenticationToken}s belonging to the {@link User}
+     * Retrieves a {@link Page} of {@link TokenData}s belonging to the {@link User}
      * with the given {@code username}, according to the given {@code pageable}.
      *
-     * @param username The username of the {@link User} owning the resultant {@link AuthenticationToken}s.
+     * @param username The username of the {@link User} owning the resultant tokens.
      * @param pageable The {@link Pageable} used to set page stuff.
      * @return The resultant {@link Page}.
      */
-    Page<AuthenticationToken> listTokens(String username, Pageable pageable);
+    Page<TokenData> listTokens(String username, Pageable pageable);
 
     /**
      * Creates an {@link AuthenticationToken} if the credentials match,

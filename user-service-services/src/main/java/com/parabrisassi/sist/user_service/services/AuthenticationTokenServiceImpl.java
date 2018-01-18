@@ -93,10 +93,11 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
 
     @Override
     @PreAuthorize("@userPermissionProvider.readByUsername(#username)")
-    public Page<AuthenticationToken> listTokens(String username, Pageable pageable) {
+    public Page<TokenData> listTokens(String username, Pageable pageable) {
         final User user = userDao.findByUsername(username).orElseThrow(NoSuchEntityException::new);
         authenticationTokenQueryHelper.validatePageable(pageable);
-        return authenticationTokenDao.findByUser(user, pageable);
+        return authenticationTokenDao.findByUserAndValidTrue(user, pageable)
+                .map(token -> new TokenData(token.getId(), token.getUser().getUsername(), token.getUser().getRoles()));
     }
 
     @Override
