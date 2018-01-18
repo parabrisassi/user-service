@@ -14,12 +14,12 @@ import org.springframework.stereotype.Repository;
 public interface AuthenticationTokenDao extends ExtendedJpaRepository<AuthenticationToken, Long> {
 
     /**
-     * Retrieves a {@link Page} of {@link AuthenticationToken}s belonging to the given {@code user},
+     * Retrieves a {@link Page} of valid {@link AuthenticationToken}s belonging to the given {@code user},
      * according to the given {@code pageable}.
      *
      * @param user     The {@link User} owning the resultant {@link AuthenticationToken}s.
      * @param pageable The {@link Pageable} used to set page stuff.
      * @return The resultant {@link Page}.
      */
-    Page<AuthenticationToken> findByUser(User user, Pageable pageable);
+    Page<AuthenticationToken> findByUserAndValidTrue(User user, Pageable pageable);
 }
