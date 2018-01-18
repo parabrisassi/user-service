@@ -13,11 +13,11 @@ import com.parabrisassi.sist.user_service.models.constants.ValidationErrorConsta
 import com.parabrisassi.sist.user_service.persistence.daos.AuthenticationTokenDao;
 import com.parabrisassi.sist.user_service.persistence.daos.UserCredentialDao;
 import com.parabrisassi.sist.user_service.persistence.daos.UserDao;
-import com.parabrisassi.sist.user_service.persistence.query_helpers.AuthenticationTokenQueryHelper;
 import com.parabrisassi.sist.user_service.security.authentication.AuthenticationTokenEncoder;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -66,12 +66,6 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     private final PasswordEncoder passwordEncoder;
 
     /**
-     * An {@link AuthenticationTokenQueryHelper}
-     * that aids the process of querying {@link AuthenticationToken}s by username.
-     */
-    private final AuthenticationTokenQueryHelper authenticationTokenQueryHelper;
-
-    /**
      * An {@link AuthenticationTokenEncoder}
      * which defines how an {@link AuthenticationToken} is encoded/decoded into/from a {@link String}.
      * This will actually define the "token protocol".
@@ -81,13 +75,11 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     @Autowired
     public AuthenticationTokenServiceImpl(UserDao userDao, AuthenticationTokenDao authenticationTokenDao,
                                           UserCredentialDao userCredentialDao, PasswordEncoder passwordEncoder,
-                                          AuthenticationTokenQueryHelper authenticationTokenQueryHelper,
                                           AuthenticationTokenEncoder authenticationTokenEncoder) {
         this.userDao = userDao;
         this.authenticationTokenDao = authenticationTokenDao;
         this.userCredentialDao = userCredentialDao;
         this.passwordEncoder = passwordEncoder;
-        this.authenticationTokenQueryHelper = authenticationTokenQueryHelper;
         this.authenticationTokenEncoder = authenticationTokenEncoder;
     }
 
@@ -95,8 +87,9 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     @PreAuthorize("@userPermissionProvider.readByUsername(#username)")
     public Page<TokenData> listTokens(String username, Pageable pageable) {
         final User user = userDao.findByUsername(username).orElseThrow(NoSuchEntityException::new);
-        authenticationTokenQueryHelper.validatePageable(pageable);
-        return authenticationTokenDao.findByUserAndValidTrue(user, pageable)
+        // Remove all sorting stuff from pageable
+        final Pageable notSortablePageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize());
+        return authenticationTokenDao.findByUserAndValidTrue(user, notSortablePageable)
                 .map(token -> new TokenData(token.getId(), token.getUser().getUsername(), token.getUser().getRoles()));
     }
 
