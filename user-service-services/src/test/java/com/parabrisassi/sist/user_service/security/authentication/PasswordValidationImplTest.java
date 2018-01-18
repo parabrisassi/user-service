@@ -186,10 +186,10 @@ public class PasswordValidationImplTest {
     private static String generateLongPassword() {
         //noinspection ConstantConditions
         if (MAX_PASSWORD_LENGTH == Integer.MAX_VALUE) {
-            return RandomStringUtils.random(MAX_PASSWORD_LENGTH) + "Some bullshit";
+            return RandomStringUtils.randomAlphanumeric(MAX_PASSWORD_LENGTH) + "Some bullshit";
         }
 
-        return RandomStringUtils.random(MAX_PASSWORD_LENGTH + 1);
+        return RandomStringUtils.randomAlphanumeric(MAX_PASSWORD_LENGTH + 1);
     }
 
     /**
