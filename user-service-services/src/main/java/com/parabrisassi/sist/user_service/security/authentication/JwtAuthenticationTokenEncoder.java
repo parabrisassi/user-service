@@ -77,7 +77,7 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
         final Claims claims = Jwts.claims();
         claims.setId(String.valueOf(token.getId()));
         claims.setSubject(token.getUsername());
-        claims.put(ROLES_CLAIM_NAME, token.getRoles());
+        claims.put(ROLES_CLAIM_NAME, token.getRoles().stream().map(Role::toString).collect(Collectors.toList()));
         final Instant now = Instant.now();
 
         return Jwts.builder()
@@ -159,7 +159,7 @@ public class JwtAuthenticationTokenEncoder implements AuthenticationTokenEncoder
             }
             // Transform the collection into a Set of Role
             @SuppressWarnings("unchecked") final Set<Role> roles = ((Collection<String>) rolesObject).stream()
-                    .map(Role::valueOf)
+                    .map(Role::fromString)
                     .collect(Collectors.toSet());
             claims.put(ROLES_CLAIM_NAME, roles);
 
