@@ -1,5 +1,6 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
+import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService.TokenData;
 import com.parabrisassi.sist.user_service.web.controller.dtos.entities.TokenDataDto;
@@ -22,8 +23,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 /**
- * Created by Juan Marcos Bellini on 18/1/18.
- * Questions at jbellini@bellotapps.com
+ * API endpoint for {@link User}'s {@link com.parabrisassi.sist.user_service.models.AuthenticationToken}s management.
  */
 @Path(UserEndpoint.USERS_ENDPOINT + "/{username : .+}" + AuthenticationTokenEndpoint.TOKENS_ENDPOINT)
 @Produces(MediaType.APPLICATION_JSON)
