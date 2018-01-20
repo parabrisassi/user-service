@@ -1,7 +1,6 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
-import com.parabrisassi.sist.user_service.models.Role;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.UserService;
 import com.parabrisassi.sist.user_service.web.controller.dtos.authentication.PasswordChangeDto;
@@ -24,8 +23,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -143,37 +140,6 @@ public class UserEndpoint implements ValidationExceptionThrower {
                 .orElseThrow(MissingJsonException::new);
     }
 
-    // TODO: add controller for roles
-
-//    @GET
-//    @Path("{id : \\d+}/authorities")
-//    public Response getAuthorities(@PathParam("id") final long id) {
-//        if (id <= 0) {
-//            throw new IllegalParamValueException(Collections.singletonList("id"));
-//        }
-//        LOGGER.debug("Getting authorities for user with id {} ", id);
-//        final Set<Role> roles = userService.getRoles(id);
-//        return Response.ok(roles).build();
-//    }
-//
-//    @PUT
-//    @Path("{id : \\d+}/authorities/{role: .+}")
-//    public Response addAuthority(@PathParam("id") final long id, @PathParam("role") final Role role) {
-//        validateRoleParams(id, role);
-//        userService.addRole(id, role);
-//        LOGGER.debug("Adding role {} to user with id {} ", role, id);
-//        return Response.noContent().build();
-//    }
-//
-//    @DELETE
-//    @Path("{id : \\d+}/authorities/{role: .+}")
-//    public Response removeAuthority(@PathParam("id") final long id, @PathParam("role") final Role role) {
-//        validateRoleParams(id, role);
-//        userService.removeRole(id, role);
-//        LOGGER.debug("Removing role {} to user with id {} ", role, id);
-//        return Response.noContent().build();
-//    }
-
     @DELETE
     @Path("{username : .+}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -217,25 +183,5 @@ public class UserEndpoint implements ValidationExceptionThrower {
                 .path(USERS_ENDPOINT)
                 .path(user.getUsername())
                 .build();
-    }
-
-    /**
-     * Performs validation over the given params.
-     *
-     * @param id   The {@link User} id param to be validated.
-     * @param role The {@link Role} param to be validated.
-     * @throws IllegalParamValueException If any of the params is not valid.
-     */
-    private static void validateRoleParams(long id, Role role) throws IllegalParamValueException {
-        final List<String> paramErrors = new LinkedList<>();
-        if (id <= 0) {
-            paramErrors.add("id");
-        }
-        if (role == null) {
-            paramErrors.add("role");
-        }
-        if (!paramErrors.isEmpty()) {
-            throw new IllegalParamValueException(paramErrors);
-        }
     }
 }

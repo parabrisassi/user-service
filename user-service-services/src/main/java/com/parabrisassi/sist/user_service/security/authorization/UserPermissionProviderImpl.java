@@ -104,10 +104,11 @@ import java.util.stream.Collectors;
      */
     private static boolean isAdmin(Authentication authentication) {
         Objects.requireNonNull(authentication, "The authentication must not be null");
-        final Set<String> roles = authentication.getAuthorities().stream()
+        final Set<Role> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
+                .map(Role::fromString)
                 .collect(Collectors.toSet());
 
-        return roles.contains(Role.ROLE_ADMIN.toString());
+        return roles.contains(Role.ROLE_ADMIN);
     }
 }
