@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.services;
 
-import com.parabrisassi.sist.user_service.exceptions.UnauthenticatedException;
+import com.parabrisassi.sist.commons.exceptions.UnauthenticatedException;
 import com.parabrisassi.sist.user_service.models.AuthenticationToken;
 import com.parabrisassi.sist.user_service.models.Role;
 import com.parabrisassi.sist.user_service.models.User;

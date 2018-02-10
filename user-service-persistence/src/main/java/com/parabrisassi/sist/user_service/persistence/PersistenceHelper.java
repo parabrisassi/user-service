@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.persistence;
 
-import com.parabrisassi.sist.user_service.exceptions.InvalidPropertiesException;
+import com.parabrisassi.sist.commons.exceptions.InvalidPropertiesException;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;

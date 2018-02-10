@@ -1,7 +1,7 @@
 package com.parabrisassi.sist.user_service.security.authentication;
 
 import com.parabrisassi.sist.commons.errors.ValidationError;
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;

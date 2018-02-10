@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.web.error_handlers;
 
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import com.parabrisassi.sist.user_service.web.Constants;
 import com.parabrisassi.sist.user_service.web.controller.dtos.api_errors.ValidationErrorDto;
 import com.bellotapps.utils.error_handler.ErrorHandler;

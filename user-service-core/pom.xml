@@ -24,6 +24,10 @@
             <groupId>com.parabrisassi.sist</groupId>
             <artifactId>commons-errors</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-exceptions</artifactId>
+        </dependency>
 
         <!-- External Libraries -->
         <!-- Hibernate Core in order to get JPA annotations (and some vendor specific features) -->

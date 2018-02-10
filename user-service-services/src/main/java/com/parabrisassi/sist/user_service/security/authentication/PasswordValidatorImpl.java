@@ -3,7 +3,7 @@ package com.parabrisassi.sist.user_service.security.authentication;
 import com.parabrisassi.sist.commons.errors.ValidationError;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;

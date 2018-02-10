@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.web.error_handlers;
 
-import com.parabrisassi.sist.user_service.exceptions.UniqueViolationException;
+import com.parabrisassi.sist.commons.exceptions.UniqueViolationException;
 import com.parabrisassi.sist.user_service.web.controller.dtos.api_errors.UniqueViolationErrorDto;
 import com.bellotapps.utils.error_handler.ErrorHandler;
 import com.bellotapps.utils.error_handler.ExceptionHandler;

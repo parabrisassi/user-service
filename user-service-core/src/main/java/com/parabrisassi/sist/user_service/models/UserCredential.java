@@ -3,7 +3,7 @@ package com.parabrisassi.sist.user_service.models;
 import com.parabrisassi.sist.commons.errors.ValidationError;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import com.parabrisassi.sist.user_service.models.constants.ValidationErrorConstants;
 
 import javax.persistence.*;

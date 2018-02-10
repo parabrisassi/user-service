@@ -1,11 +1,11 @@
 package com.parabrisassi.sist.user_service.services;
 
 import com.parabrisassi.sist.commons.errors.ValidationError;
+import com.parabrisassi.sist.commons.exceptions.UnauthenticatedException;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
-import com.parabrisassi.sist.user_service.exceptions.InvalidCredentialsException;
-import com.parabrisassi.sist.user_service.exceptions.NoSuchEntityException;
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.exceptions.NoSuchEntityException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import com.parabrisassi.sist.user_service.models.AuthenticationToken;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.models.UserCredential;
@@ -219,4 +219,37 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
 
     private static final ValidationError MISSING_ENCODED_TOKEN = new ValidationError(MISSING_VALUE,
             "encodedToken", "The encoded token is missing");
+
+    /**
+     * Exception thrown when any of the authentication credentials (user and password) are not correct.
+     */
+    private class InvalidCredentialsException extends UnauthenticatedException {
+
+        /**
+         * Default constructor.
+         */
+        private InvalidCredentialsException() {
+            super();
+        }
+
+        /**
+         * Constructor which can set a {@code message}.
+         *
+         * @param message The detail message, which is saved for later retrieval by the {@link #getMessage()} method.
+         */
+        private InvalidCredentialsException(String message) {
+            super(message);
+        }
+
+        /**
+         * Constructor which can set a mes{@code message} and a {@code cause}.
+         *
+         * @param message The detail message, which is saved for later retrieval by the {@link #getMessage()} method.
+         * @param cause   The cause (which is saved for later retrieval by the {@link #getCause()} method).
+         *                For more information, see {@link RuntimeException#RuntimeException(Throwable)}.
+         */
+        private InvalidCredentialsException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
 }
