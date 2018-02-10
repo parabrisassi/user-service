@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.services;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.ValidationError;
+import com.parabrisassi.sist.commons.errors.ValidationError;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
 import com.parabrisassi.sist.user_service.exceptions.InvalidCredentialsException;
@@ -30,7 +30,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.parabrisassi.sist.user_service.error_handling.errros.ValidationError.ErrorCause.MISSING_VALUE;
+import static com.parabrisassi.sist.commons.errors.ValidationError.ErrorCause.MISSING_VALUE;
 import static com.parabrisassi.sist.user_service.models.constants.ValidationErrorConstants.MISSING_USERNAME;
 
 /**

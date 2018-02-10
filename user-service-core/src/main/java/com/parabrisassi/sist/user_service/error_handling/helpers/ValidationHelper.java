@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.error_handling.helpers;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.ValidationError;
+import com.parabrisassi.sist.commons.errors.ValidationError;
 import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Arrays;

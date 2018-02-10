@@ -72,6 +72,11 @@
                 <artifactId>commons-repositories</artifactId>
                 <version>${com.parabrisassi.sist.commons.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.parabrisassi.sist</groupId>
+                <artifactId>commons-errors</artifactId>
+                <version>${com.parabrisassi.sist.commons.version}</version>
+            </dependency>
 
             <!-- Flyway stuff -->
             <dependency>

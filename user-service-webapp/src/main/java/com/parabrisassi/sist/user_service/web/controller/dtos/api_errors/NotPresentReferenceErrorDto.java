@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.web.controller.dtos.api_errors;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.NotPresentReferenceError;
+import com.parabrisassi.sist.commons.errors.NotPresentReferenceError;
 
 import java.util.List;
 

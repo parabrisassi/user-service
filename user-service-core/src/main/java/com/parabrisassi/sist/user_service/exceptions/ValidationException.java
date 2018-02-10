@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.exceptions;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.ValidationError;
+import com.parabrisassi.sist.commons.errors.ValidationError;
 
 import java.util.List;
 

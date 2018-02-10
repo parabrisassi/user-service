@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.error_handling.helpers;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.UniqueViolationError;
+import com.parabrisassi.sist.commons.errors.UniqueViolationError;
 import com.parabrisassi.sist.user_service.exceptions.UniqueViolationException;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.security.authentication;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.ValidationError;
+import com.parabrisassi.sist.commons.errors.ValidationError;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
 import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
 import com.parabrisassi.sist.user_service.exceptions.ValidationException;
@@ -10,8 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import static com.parabrisassi.sist.user_service.error_handling.errros.ValidationError.ErrorCause.ILLEGAL_VALUE;
-import static com.parabrisassi.sist.user_service.error_handling.errros.ValidationError.ErrorCause.MISSING_VALUE;
+import static com.parabrisassi.sist.commons.errors.ValidationError.ErrorCause.ILLEGAL_VALUE;
+import static com.parabrisassi.sist.commons.errors.ValidationError.ErrorCause.MISSING_VALUE;
 
 /**
  * Concrete implementation of {@link PasswordValidator}.
