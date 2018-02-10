@@ -1,7 +1,7 @@
 package com.parabrisassi.sist.user_service.persistence.daos;
 
+import com.parabrisassi.sist.commons.repositories.ExtendedJpaRepository;
 import com.parabrisassi.sist.user_service.models.User;
-import com.parabrisassi.sist.user_service.persistence.custom_repositories.ExtendedJpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
