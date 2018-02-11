@@ -2,8 +2,8 @@ package com.parabrisassi.sist.user_service.services;
 
 import com.parabrisassi.sist.commons.errors.ValidationError;
 import com.parabrisassi.sist.commons.exceptions.UnauthenticatedException;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
+import com.parabrisassi.sist.commons.validation.ValidationExceptionThrower;
+import com.parabrisassi.sist.commons.validation.ValidationHelper;
 import com.parabrisassi.sist.commons.exceptions.NoSuchEntityException;
 import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import com.parabrisassi.sist.user_service.models.AuthenticationToken;
@@ -113,7 +113,7 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     @Override
     public TokenData fromEncodedToken(String encodedToken) {
         if (encodedToken == null) {
-            throwValidationException(Collections.singletonList(MISSING_ENCODED_TOKEN));
+            throwIfNotEmpty(Collections.singletonList(MISSING_ENCODED_TOKEN));
         }
         final TokenData tokenData = authenticationTokenEncoder.decode(encodedToken);
         if (!doValidateToken(tokenData.getId(), tokenData.getUsername())) {
@@ -125,7 +125,7 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     @Override
     public boolean isValidToken(long id, String username) {
         if (username == null) {
-            throwValidationException(Collections.singletonList(ValidationErrorConstants.MISSING_USERNAME));
+            throwIfNotEmpty(Collections.singletonList(ValidationErrorConstants.MISSING_USERNAME));
         }
         return doValidateToken(id, username);
     }
@@ -158,7 +158,7 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
         ValidationHelper.objectNotNull(username, errorList, MISSING_USERNAME);
         ValidationHelper.objectNotNull(password, errorList, MISSING_PASSWORD);
 
-        throwValidationException(errorList);
+        throwIfNotEmpty(errorList);
     }
 
     /**

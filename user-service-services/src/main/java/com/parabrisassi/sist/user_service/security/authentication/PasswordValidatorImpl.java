@@ -1,8 +1,8 @@
 package com.parabrisassi.sist.user_service.security.authentication;
 
 import com.parabrisassi.sist.commons.errors.ValidationError;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
+import com.parabrisassi.sist.commons.validation.ValidationExceptionThrower;
+import com.parabrisassi.sist.commons.validation.ValidationHelper;
 import com.parabrisassi.sist.commons.exceptions.ValidationException;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ public class PasswordValidatorImpl implements PasswordValidator, ValidationExcep
                 .map(CharSequence::toString)
                 .orElse(null);
         final List<ValidationError> errors = new LinkedList<>();
-        ValidationHelper.stringNotNullAndLengthBetweenTwoValues(passwordString,
+        ValidationHelper.stringNotNullAndLengthBetween(passwordString,
                 MIN_PASSWORD_LENGTH, MAX_PASSWORD_LENGTH,
                 errors,
                 MISSING_PASSWORD, PASSWORD_TOO_SHORT, PASSWORD_TOO_LONG);
@@ -47,7 +47,7 @@ public class PasswordValidatorImpl implements PasswordValidator, ValidationExcep
             errors.add(PASSWORD_SPECIAL_CHARACTER_MISSING);
         }
 
-        throwValidationException(errors); // Throws ValidationException in case the list is not empty
+        throwIfNotEmpty(errors); // Throws ValidationException in case the list is not empty
     }
 
     /**

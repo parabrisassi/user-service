@@ -1,6 +1,5 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.UserService;
 import com.parabrisassi.sist.user_service.web.controller.dtos.authentication.PasswordChangeDto;
@@ -33,7 +32,7 @@ import java.util.stream.Collectors;
 @Path(UserEndpoint.USERS_ENDPOINT)
 @Produces(MediaType.APPLICATION_JSON)
 @JerseyController
-public class UserEndpoint implements ValidationExceptionThrower {
+public class UserEndpoint {
 
     /**
      * Endpoint for {@link User} management.

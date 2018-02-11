@@ -1,9 +1,9 @@
 package com.parabrisassi.sist.user_service.models;
 
 import com.parabrisassi.sist.commons.errors.ValidationError;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
 import com.parabrisassi.sist.commons.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.validation.ValidationExceptionThrower;
+import com.parabrisassi.sist.commons.validation.ValidationHelper;
 import com.parabrisassi.sist.user_service.models.constants.ValidationConstants;
 import com.parabrisassi.sist.user_service.models.constants.ValidationErrorConstants;
 
@@ -63,7 +63,7 @@ public class User implements ValidationExceptionThrower {
             throws ValidationException {
         final List<ValidationError> errorList = new LinkedList<>();
         changeUsername(username, errorList);
-        throwValidationException(errorList); // Throws ValidationException if values were not valid
+        throwIfNotEmpty(errorList); // Throws ValidationException if values were not valid
         this.roles = Stream.of(Role.ROLE_USER).collect(Collectors.toSet());
     }
 
@@ -97,7 +97,7 @@ public class User implements ValidationExceptionThrower {
     public void changeUsername(String username) {
         final List<ValidationError> errorList = new LinkedList<>();
         changeUsername(username, errorList);
-        throwValidationException(errorList); // Throws ValidationException if the username was not valid
+        throwIfNotEmpty(errorList); // Throws ValidationException if the username was not valid
     }
 
     /**
@@ -109,7 +109,7 @@ public class User implements ValidationExceptionThrower {
     public void addRole(Role role) {
         final List<ValidationError> errorList = new LinkedList<>();
         validateRole(role, errorList);
-        throwValidationException(errorList);
+        throwIfNotEmpty(errorList);
 
         this.roles.add(role);
     }
@@ -123,7 +123,7 @@ public class User implements ValidationExceptionThrower {
     public void removeRole(Role role) {
         final List<ValidationError> errorList = new LinkedList<>();
         validateRole(role, errorList);
-        throwValidationException(errorList);
+        throwIfNotEmpty(errorList);
 
         this.roles.remove(role);
     }
@@ -229,7 +229,7 @@ public class User implements ValidationExceptionThrower {
      */
     private static void validateUsername(String username, List<ValidationError> errorList) {
         Objects.requireNonNull(errorList, "The error list must not be null!");
-        ValidationHelper.stringNotNullAndLengthBetweenTwoValues(username, ValidationConstants.USERNAME_MIN_LENGTH,
+        ValidationHelper.stringNotNullAndLengthBetween(username, ValidationConstants.USERNAME_MIN_LENGTH,
                 ValidationConstants.USERNAME_MAX_LENGTH, errorList, ValidationErrorConstants.MISSING_USERNAME,
                 ValidationErrorConstants.USERNAME_TOO_SHORT, ValidationErrorConstants.USERNAME_TOO_LONG);
     }
