@@ -66,26 +66,13 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Commons -->
+            <!-- Parabrisas San Isidro Management Software Commons Library BOM -->
             <dependency>
                 <groupId>com.parabrisassi.sist</groupId>
-                <artifactId>commons-repositories</artifactId>
+                <artifactId>commons-bom</artifactId>
                 <version>${com.parabrisassi.sist.commons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.parabrisassi.sist</groupId>
-                <artifactId>commons-errors</artifactId>
-                <version>${com.parabrisassi.sist.commons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.parabrisassi.sist</groupId>
-                <artifactId>commons-exceptions</artifactId>
-                <version>${com.parabrisassi.sist.commons.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.parabrisassi.sist</groupId>
-                <artifactId>commons-models-validation</artifactId>
-                <version>${com.parabrisassi.sist.commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!-- Flyway stuff -->
