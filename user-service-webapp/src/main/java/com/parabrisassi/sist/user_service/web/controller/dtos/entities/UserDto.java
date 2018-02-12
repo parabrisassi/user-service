@@ -2,9 +2,9 @@ package com.parabrisassi.sist.user_service.web.controller.dtos.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.parabrisassi.sist.commons.data_transfer.json.serializers.URISerializer;
 import com.parabrisassi.sist.user_service.models.Role;
 import com.parabrisassi.sist.user_service.models.User;
-import com.parabrisassi.sist.user_service.web.support.data_transfer.json.serializers.URISerializer;
 import org.hibernate.Hibernate;
 
 import java.net.URI;

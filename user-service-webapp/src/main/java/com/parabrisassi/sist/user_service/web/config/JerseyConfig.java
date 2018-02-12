@@ -26,7 +26,7 @@ import java.util.Collection;
         // Register packages with resources and providers
         registerPackages(this,
                 "com.parabrisassi.sist.user_service.web.controller.rest_endpoints",
-                "com.parabrisassi.sist.user_service.web.support.data_transfer.jersey_providers");
+                "com.parabrisassi.sist.commons.data_transfer.jersey_providers");
         // Register ObjectMapper which will be used to serialize/deserialize JSON
         register(new JacksonJaxbJsonProvider(objectMapper, JacksonJaxbJsonProvider.DEFAULT_ANNOTATIONS));
         // Register the ThrowableMapper that will wire the exception into the error handler

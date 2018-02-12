@@ -1,5 +1,6 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
+import com.parabrisassi.sist.commons.data_transfer.annotations.PaginationParam;
 import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
 import com.parabrisassi.sist.commons.exceptions.MissingJsonException;
 import com.parabrisassi.sist.user_service.models.User;
@@ -8,7 +9,6 @@ import com.parabrisassi.sist.user_service.web.controller.dtos.authentication.Pas
 import com.parabrisassi.sist.user_service.web.controller.dtos.entities.StringValueDto;
 import com.parabrisassi.sist.user_service.web.controller.dtos.entities.UserDto;
 import com.parabrisassi.sist.user_service.web.support.annotations.JerseyController;
-import com.parabrisassi.sist.user_service.web.support.annotations.PaginationParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

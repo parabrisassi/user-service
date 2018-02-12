@@ -45,6 +45,10 @@
 
         <dependency>
             <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-data-transfer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
             <artifactId>commons-dtos</artifactId>
         </dependency>
         <dependency>

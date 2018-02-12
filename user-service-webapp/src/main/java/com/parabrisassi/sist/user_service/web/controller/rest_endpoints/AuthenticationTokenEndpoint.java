@@ -1,12 +1,12 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
+import com.parabrisassi.sist.commons.data_transfer.annotations.Base64url;
+import com.parabrisassi.sist.commons.data_transfer.base64.Base64UrlHelper;
 import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
 import com.parabrisassi.sist.commons.exceptions.MissingJsonException;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
 import com.parabrisassi.sist.user_service.web.controller.dtos.authentication.CredentialsDto;
-import com.parabrisassi.sist.user_service.web.support.annotations.Base64url;
 import com.parabrisassi.sist.user_service.web.support.annotations.JerseyController;
-import com.parabrisassi.sist.user_service.web.support.data_transfer.Base64UrlHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
