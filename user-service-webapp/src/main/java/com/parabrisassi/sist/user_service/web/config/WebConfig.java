@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({
         "com.parabrisassi.sist.user_service.web.controller",
 })
-@EnableErrorHandler(basePackages = "com.parabrisassi.sist.user_service.web.error_handlers")
+@EnableErrorHandler(basePackages = {
+        "com.parabrisassi.sist.commons.error_handlers",
+})
 public class WebConfig {
 }

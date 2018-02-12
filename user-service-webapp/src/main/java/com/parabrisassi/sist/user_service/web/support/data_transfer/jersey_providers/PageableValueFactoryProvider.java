@@ -1,8 +1,8 @@
 package com.parabrisassi.sist.user_service.web.support.data_transfer.jersey_providers;
 
-import com.parabrisassi.sist.user_service.web.Constants;
+import com.parabrisassi.sist.commons.constants.WebConstants;
+import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
 import com.parabrisassi.sist.user_service.web.support.annotations.PaginationParam;
-import com.parabrisassi.sist.user_service.web.support.exceptions.IllegalParamValueException;
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.server.ParamException;
@@ -89,7 +89,7 @@ public class PageableValueFactoryProvider implements ValueFactoryProvider {
                 illegalValueParams.add("page");
             }
             // Validate Page Size
-            if (container.size < 0 || container.size > Constants.MAX_PAGE_SIZE) {
+            if (container.size < 0 || container.size > WebConstants.MAX_PAGE_SIZE) {
                 illegalValueParams.add("size");
             }
 
@@ -131,12 +131,12 @@ public class PageableValueFactoryProvider implements ValueFactoryProvider {
         private static final class ParamsContainer {
 
             @QueryParam("page")
-            @DefaultValue(Constants.DEFAULT_PAGE_NUMBER_STRING)
+            @DefaultValue(WebConstants.DEFAULT_PAGE_NUMBER_STRING)
             @SuppressWarnings("unused")
             private Integer page;
 
             @QueryParam("size")
-            @DefaultValue(Constants.DEFAULT_PAGE_SIZE_STRING)
+            @DefaultValue(WebConstants.DEFAULT_PAGE_SIZE_STRING)
             @SuppressWarnings("unused")
             private Integer size;
 
