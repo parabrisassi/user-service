@@ -26,13 +26,12 @@
         <org.spring-boot-maven-plugin.version>1.5.8.RELEASE</org.spring-boot-maven-plugin.version>
 
         <!-- Dependencies -->
-        <com.parabrisassi.sist.dependencies.version>0.0.1-RELEASE</com.parabrisassi.sist.dependencies.version>
+        <com.parabrisassi.sist.dependencies.version>0.0.2-RELEASE</com.parabrisassi.sist.dependencies.version>
         <com.parabrisassi.sist.commons.version>1.0-SNAPSHOT</com.parabrisassi.sist.commons.version>
         <org.flywaydb.version>4.2.0</org.flywaydb.version>
         <apache-commons-io.version>2.5</apache-commons-io.version>
         <commons-validator.version>1.6</commons-validator.version>
         <org.apache.commons.commons-lang3.version>3.7</org.apache.commons.commons-lang3.version>
-        <com.bellotapps.utils.error-handler.version>2.0.0-SNAPSHOT</com.bellotapps.utils.error-handler.version>
         <io.jsonwebtoken.jjwt.version>0.9.0</io.jsonwebtoken.jjwt.version>
         <junit.version>RELEASE</junit.version>
 
@@ -94,13 +93,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${org.apache.commons.commons-lang3.version}</version>
-            </dependency>
-
-            <!-- Error management -->
-            <dependency>
-                <groupId>com.bellotapps.utils</groupId>
-                <artifactId>error-handler</artifactId>
-                <version>${com.bellotapps.utils.error-handler.version}</version>
             </dependency>
 
             <!-- JSON Web Tokens-->
