@@ -57,6 +57,10 @@
         </dependency>
         <dependency>
             <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-web-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
             <artifactId>commons-web-constants</artifactId>
         </dependency>
         <dependency>

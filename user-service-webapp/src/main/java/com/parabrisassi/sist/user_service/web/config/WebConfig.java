@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.web.config;
 
-import com.bellotapps.utils.error_handler.EnableErrorHandler;
+import com.parabrisassi.sist.commons.config.EnableJerseyApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,7 +11,10 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({
         "com.parabrisassi.sist.user_service.web.controller",
 })
-@EnableErrorHandler(basePackages = {
+@EnableJerseyApplication(basePackages = {
+        "com.parabrisassi.sist.user_service.web.controller.rest_endpoints",
+        "com.parabrisassi.sist.commons.data_transfer.jersey_providers",
+}, errorHandlersPackages = {
         "com.parabrisassi.sist.commons.error_handlers",
 })
 public class WebConfig {

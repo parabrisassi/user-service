@@ -1,10 +1,10 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
+import com.parabrisassi.sist.commons.config.JerseyController;
 import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
 import com.parabrisassi.sist.user_service.models.Role;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.UserService;
-import com.parabrisassi.sist.user_service.web.support.annotations.JerseyController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
