@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.web.security.authentication;
 
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

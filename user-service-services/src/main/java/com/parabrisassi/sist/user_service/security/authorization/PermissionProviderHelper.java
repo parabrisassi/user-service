@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.security.authorization;
 
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.user_service.models.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Helper class for authorization tasks.
  */
-/* paclage */ class PermissionProviderHelper {
+/* package */ class PermissionProviderHelper {
 
     /**
      * Checks whether the currently authenticated {@link User} is admin (i.e has {@link Role#ROLE_ADMIN} role).

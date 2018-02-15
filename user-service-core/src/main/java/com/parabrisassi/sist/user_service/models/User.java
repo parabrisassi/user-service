@@ -2,6 +2,7 @@ package com.parabrisassi.sist.user_service.models;
 
 import com.parabrisassi.sist.commons.errors.ValidationError;
 import com.parabrisassi.sist.commons.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.commons.validation.ValidationExceptionThrower;
 import com.parabrisassi.sist.commons.validation.ValidationHelper;
 import com.parabrisassi.sist.user_service.models.constants.ValidationConstants;

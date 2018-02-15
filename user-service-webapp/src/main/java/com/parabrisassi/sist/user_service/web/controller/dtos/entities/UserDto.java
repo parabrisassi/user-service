@@ -3,7 +3,7 @@ package com.parabrisassi.sist.user_service.web.controller.dtos.entities;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.parabrisassi.sist.commons.data_transfer.json.serializers.URISerializer;
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.user_service.models.User;
 import org.hibernate.Hibernate;
 

@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.security.authentication;
 
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.security.authorization;
 
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.user_service.models.User;
 
 /**

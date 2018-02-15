@@ -2,7 +2,7 @@ package com.parabrisassi.sist.user_service.web.controller.dtos.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.parabrisassi.sist.commons.data_transfer.base64.Base64UrlHelper;
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService.TokenData;
 
 import java.util.LinkedList;

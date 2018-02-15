@@ -2,7 +2,7 @@ package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
 import com.parabrisassi.sist.commons.config.JerseyController;
 import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.roles.Role;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.UserService;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import java.util.Set;
 import static com.parabrisassi.sist.user_service.web.controller.rest_endpoints.UserRolesEndpoint.ROLES_ENDPOINT;
 
 /**
- * API endpoint for {@link User}s {@link com.parabrisassi.sist.user_service.models.Role}s management.
+ * API endpoint for {@link User}s {@link Role}s management.
  */
 @Path(UserEndpoint.USERS_ENDPOINT + "/{username : .+}" + ROLES_ENDPOINT)
 @Produces(MediaType.APPLICATION_JSON)

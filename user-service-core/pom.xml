@@ -33,6 +33,11 @@
             <artifactId>commons-models-validation</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-roles</artifactId>
+        </dependency>
+
         <!-- External Libraries -->
         <!-- Hibernate Core in order to get JPA annotations (and some vendor specific features) -->
         <dependency>
