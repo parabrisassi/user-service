@@ -1,15 +1,15 @@
 package com.parabrisassi.sist.user_service.services;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.ValidationError;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationHelper;
-import com.parabrisassi.sist.user_service.exceptions.InvalidCredentialsException;
-import com.parabrisassi.sist.user_service.exceptions.NoSuchEntityException;
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.authentication.TokenData;
+import com.parabrisassi.sist.commons.errors.ValidationError;
+import com.parabrisassi.sist.commons.exceptions.NoSuchEntityException;
+import com.parabrisassi.sist.commons.exceptions.UnauthenticatedException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.validation.ValidationExceptionThrower;
+import com.parabrisassi.sist.commons.validation.ValidationHelper;
 import com.parabrisassi.sist.user_service.models.AuthenticationToken;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.models.UserCredential;
-import com.parabrisassi.sist.user_service.models.constants.ValidationErrorConstants;
 import com.parabrisassi.sist.user_service.persistence.daos.AuthenticationTokenDao;
 import com.parabrisassi.sist.user_service.persistence.daos.UserCredentialDao;
 import com.parabrisassi.sist.user_service.persistence.daos.UserDao;
@@ -23,14 +23,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 
 import java.security.SecureRandom;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.parabrisassi.sist.user_service.error_handling.errros.ValidationError.ErrorCause.MISSING_VALUE;
+import static com.parabrisassi.sist.commons.errors.ValidationError.ErrorCause.MISSING_VALUE;
 import static com.parabrisassi.sist.user_service.models.constants.ValidationErrorConstants.MISSING_USERNAME;
 
 /**
@@ -111,23 +109,10 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
     }
 
     @Override
-    public TokenData fromEncodedToken(String encodedToken) {
-        if (encodedToken == null) {
-            throwValidationException(Collections.singletonList(MISSING_ENCODED_TOKEN));
-        }
-        final TokenData tokenData = authenticationTokenEncoder.decode(encodedToken);
-        if (!doValidateToken(tokenData.getId(), tokenData.getUsername())) {
-            throw new TokenException("Invalid token");
-        }
-        return tokenData;
-    }
-
-    @Override
-    public boolean isValidToken(long id, String username) {
-        if (username == null) {
-            throwValidationException(Collections.singletonList(ValidationErrorConstants.MISSING_USERNAME));
-        }
-        return doValidateToken(id, username);
+    public boolean isBlacklisted(long tokenId) {
+        return authenticationTokenDao.findById(tokenId)
+                .filter(AuthenticationToken::isValid)
+                .isPresent();
     }
 
     @Override
@@ -158,7 +143,7 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
         ValidationHelper.objectNotNull(username, errorList, MISSING_USERNAME);
         ValidationHelper.objectNotNull(password, errorList, MISSING_PASSWORD);
 
-        throwValidationException(errorList);
+        throwIfNotEmpty(errorList);
     }
 
     /**
@@ -198,25 +183,39 @@ public class AuthenticationTokenServiceImpl implements AuthenticationTokenServic
         throw new RuntimeException("Could not create an authentication token after " + MAX_TRIES + "tries");
     }
 
-    /**
-     * Performs validation of a token
-     * (i.e exist with the given id, is valid, and belong to the {@link User} with the given {@code username}).
-     *
-     * @param id       The id of the token to be validated.
-     * @param username The username of the {@link User} that must be the owner of the token.
-     * @return {@code true} if the token is valid, or {@code false} otherwise.
-     */
-    private boolean doValidateToken(long id, String username) {
-        Assert.notNull(username, "The username must not be null");
-        return authenticationTokenDao.findById(id)
-                .filter(AuthenticationToken::isValid)
-                .filter(token -> username.equals(token.getUser().getUsername()))
-                .isPresent();
-    }
-
     private static final ValidationError MISSING_PASSWORD = new ValidationError(MISSING_VALUE, "password",
             "The password is missing");
 
-    private static final ValidationError MISSING_ENCODED_TOKEN = new ValidationError(MISSING_VALUE,
-            "encodedToken", "The encoded token is missing");
+    /**
+     * Exception thrown when any of the authentication credentials (user and password) are not correct.
+     */
+    private class InvalidCredentialsException extends UnauthenticatedException {
+
+        /**
+         * Default constructor.
+         */
+        private InvalidCredentialsException() {
+            super();
+        }
+
+        /**
+         * Constructor which can set a {@code message}.
+         *
+         * @param message The detail message, which is saved for later retrieval by the {@link #getMessage()} method.
+         */
+        private InvalidCredentialsException(String message) {
+            super(message);
+        }
+
+        /**
+         * Constructor which can set a mes{@code message} and a {@code cause}.
+         *
+         * @param message The detail message, which is saved for later retrieval by the {@link #getMessage()} method.
+         * @param cause   The cause (which is saved for later retrieval by the {@link #getCause()} method).
+         *                For more information, see {@link RuntimeException#RuntimeException(Throwable)}.
+         */
+        private InvalidCredentialsException(String message, Throwable cause) {
+            super(message, cause);
+        }
+    }
 }

@@ -1,10 +1,10 @@
 package com.parabrisassi.sist.user_service.models.constants;
 
 
-import com.parabrisassi.sist.user_service.error_handling.errros.ValidationError;
+import com.parabrisassi.sist.commons.errors.ValidationError;
 
-import static com.parabrisassi.sist.user_service.error_handling.errros.ValidationError.ErrorCause.ILLEGAL_VALUE;
-import static com.parabrisassi.sist.user_service.error_handling.errros.ValidationError.ErrorCause.MISSING_VALUE;
+import static com.parabrisassi.sist.commons.errors.ValidationError.ErrorCause.ILLEGAL_VALUE;
+import static com.parabrisassi.sist.commons.errors.ValidationError.ErrorCause.MISSING_VALUE;
 
 /**
  * Class containing {@link ValidationError} constants to be reused.

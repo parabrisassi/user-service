@@ -32,5 +32,10 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-repositories</artifactId>
+        </dependency>
     </dependencies>
 </project>

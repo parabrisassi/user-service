@@ -1,11 +1,11 @@
 package com.parabrisassi.sist.user_service.services;
 
-import com.parabrisassi.sist.user_service.error_handling.errros.UniqueViolationError;
-import com.parabrisassi.sist.user_service.error_handling.helpers.UniqueViolationExceptionThrower;
-import com.parabrisassi.sist.user_service.exceptions.NoSuchEntityException;
-import com.parabrisassi.sist.user_service.exceptions.UnauthorizedException;
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
-import com.parabrisassi.sist.user_service.models.Role;
+import com.parabrisassi.sist.commons.errors.UniqueViolationError;
+import com.parabrisassi.sist.commons.exceptions.NoSuchEntityException;
+import com.parabrisassi.sist.commons.exceptions.UnauthorizedException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.roles.Role;
+import com.parabrisassi.sist.commons.validation.UniqueViolationExceptionThrower;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.models.UserCredential;
 import com.parabrisassi.sist.user_service.persistence.daos.UserCredentialDao;
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService, UniqueViolationExceptionThr
     public User register(String username, String password) {
         final List<UniqueViolationError> errorList = new LinkedList<>();
         checkUsernameUniqueness(username, errorList);
-        throwUniqueViolationException(errorList);
+        throwIfNotEmpty(errorList);
 
         final User user = userDao.save(new User(username));
         createCredential(user, password);
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService, UniqueViolationExceptionThr
 
         final List<UniqueViolationError> errorList = new LinkedList<>();
         checkUsernameUniqueness(newUsername, errorList);
-        throwUniqueViolationException(errorList);
+        throwIfNotEmpty(errorList);
 
         user.changeUsername(newUsername);
         userDao.save(user);

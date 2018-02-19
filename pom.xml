@@ -23,14 +23,15 @@
         <!-- Plugins -->
         <maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
         <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
+        <org.spring-boot-maven-plugin.version>1.5.8.RELEASE</org.spring-boot-maven-plugin.version>
 
         <!-- Dependencies -->
-        <org.springframework.boot.version>1.5.8.RELEASE</org.springframework.boot.version>
+        <com.parabrisassi.sist.dependencies.version>0.0.2-RELEASE</com.parabrisassi.sist.dependencies.version>
+        <com.parabrisassi.sist.commons.version>1.0.0-RELEASE</com.parabrisassi.sist.commons.version>
         <org.flywaydb.version>4.2.0</org.flywaydb.version>
         <apache-commons-io.version>2.5</apache-commons-io.version>
         <commons-validator.version>1.6</commons-validator.version>
         <org.apache.commons.commons-lang3.version>3.7</org.apache.commons.commons-lang3.version>
-        <com.bellotapps.utils.error-handler.version>1.0.1-RELEASE</com.bellotapps.utils.error-handler.version>
         <io.jsonwebtoken.jjwt.version>0.9.0</io.jsonwebtoken.jjwt.version>
         <junit.version>RELEASE</junit.version>
 
@@ -45,18 +46,33 @@
         <module>user-service-webapp</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>psi-artifactory</id>
+            <name>psi-artifactory</name>
+            <url>https://artifactory.parabrisassi.com/artifactory/libs-release/</url>
+        </repository>
+    </repositories>
+
     <dependencyManagement>
         <dependencies>
-            <!-- Spring boot dependencies -->
-            <!-- Spring Boot dependency management import -->
+            <!-- Parabrisas San Isidro Management System Dependencies -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${org.springframework.boot.version}</version>
+                <groupId>com.parabrisassi.sist</groupId>
+                <artifactId>dependencies</artifactId>
+                <version>${com.parabrisassi.sist.dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
 
+            <!-- Parabrisas San Isidro Management Software Commons Library BOM -->
+            <dependency>
+                <groupId>com.parabrisassi.sist</groupId>
+                <artifactId>commons-bom</artifactId>
+                <version>${com.parabrisassi.sist.commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!-- Flyway stuff -->
             <dependency>
@@ -77,13 +93,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${org.apache.commons.commons-lang3.version}</version>
-            </dependency>
-
-            <!-- Error management -->
-            <dependency>
-                <groupId>com.bellotapps.utils</groupId>
-                <artifactId>error-handler</artifactId>
-                <version>${com.bellotapps.utils.error-handler.version}</version>
             </dependency>
 
             <!-- JSON Web Tokens-->
@@ -129,7 +138,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${org.springframework.boot.version}</version>
+                    <version>${org.spring-boot-maven-plugin.version}</version>
                     <executions>
                         <execution>
                             <goals>

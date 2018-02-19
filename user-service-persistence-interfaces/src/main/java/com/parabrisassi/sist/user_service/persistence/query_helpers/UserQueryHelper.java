@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.persistence.query_helpers;
 
-import com.parabrisassi.sist.user_service.exceptions.InvalidPropertiesException;
+import com.parabrisassi.sist.commons.exceptions.InvalidPropertiesException;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.persistence.daos.UserDao;
 import org.springframework.data.domain.Pageable;

@@ -1,15 +1,14 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
-import com.parabrisassi.sist.user_service.error_handling.helpers.ValidationExceptionThrower;
+import com.parabrisassi.sist.commons.config.JerseyController;
+import com.parabrisassi.sist.commons.data_transfer.annotations.PaginationParam;
+import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
+import com.parabrisassi.sist.commons.exceptions.MissingJsonException;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.UserService;
 import com.parabrisassi.sist.user_service.web.controller.dtos.authentication.PasswordChangeDto;
 import com.parabrisassi.sist.user_service.web.controller.dtos.entities.StringValueDto;
 import com.parabrisassi.sist.user_service.web.controller.dtos.entities.UserDto;
-import com.parabrisassi.sist.user_service.web.support.annotations.JerseyController;
-import com.parabrisassi.sist.user_service.web.support.annotations.PaginationParam;
-import com.parabrisassi.sist.user_service.web.support.exceptions.IllegalParamValueException;
-import com.parabrisassi.sist.user_service.web.support.exceptions.MissingJsonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ import java.util.stream.Collectors;
 @Path(UserEndpoint.USERS_ENDPOINT)
 @Produces(MediaType.APPLICATION_JSON)
 @JerseyController
-public class UserEndpoint implements ValidationExceptionThrower {
+public class UserEndpoint {
 
     /**
      * Endpoint for {@link User} management.

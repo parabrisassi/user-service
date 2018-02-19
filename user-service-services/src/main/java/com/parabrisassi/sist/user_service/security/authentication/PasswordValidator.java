@@ -1,6 +1,6 @@
 package com.parabrisassi.sist.user_service.security.authentication;
 
-import com.parabrisassi.sist.user_service.exceptions.ValidationException;
+import com.parabrisassi.sist.commons.exceptions.ValidationException;
 
 /**
  * Defines behaviour of an object that is in charge of validating a password.

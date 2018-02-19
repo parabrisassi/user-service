@@ -43,6 +43,39 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-authentication-interfaces</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-data-transfer</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-dtos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-error-handlers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-web-authentication</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-web-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-web-constants</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-web-exceptions</artifactId>
+        </dependency>
+
         <!-- External Libraries -->
         <!-- Spring Boot -->
         <!-- Spring boot starters -->

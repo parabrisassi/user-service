@@ -26,6 +26,11 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-authentication-interfaces</artifactId>
+        </dependency>
+
         <!-- External Libraries -->
         <!-- Spring Data Commons to get some classes used in method signatures  -->
         <dependency>
