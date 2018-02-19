@@ -27,7 +27,7 @@
 
         <!-- Dependencies -->
         <com.parabrisassi.sist.dependencies.version>0.0.2-RELEASE</com.parabrisassi.sist.dependencies.version>
-        <com.parabrisassi.sist.commons.version>1.0-SNAPSHOT</com.parabrisassi.sist.commons.version>
+        <com.parabrisassi.sist.commons.version>1.0.0-RELEASE</com.parabrisassi.sist.commons.version>
         <org.flywaydb.version>4.2.0</org.flywaydb.version>
         <apache-commons-io.version>2.5</apache-commons-io.version>
         <commons-validator.version>1.6</commons-validator.version>
