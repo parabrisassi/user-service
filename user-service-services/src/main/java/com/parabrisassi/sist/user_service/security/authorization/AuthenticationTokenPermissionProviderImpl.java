@@ -1,9 +1,9 @@
 package com.parabrisassi.sist.user_service.security.authorization;
 
+import com.parabrisassi.sist.commons.authentication.TokenException;
 import com.parabrisassi.sist.user_service.models.AuthenticationToken;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.persistence.daos.AuthenticationTokenDao;
-import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -53,6 +53,6 @@ public class AuthenticationTokenPermissionProviderImpl implements Authentication
                 .map(AuthenticationToken::getUser)
                 .map(User::getUsername)
                 .map(username -> username.equals(principal))
-                .orElseThrow(() -> new AuthenticationTokenService.TokenException("Invalid token"));
+                .orElseThrow(() -> new TokenException("Invalid token"));
     }
 }

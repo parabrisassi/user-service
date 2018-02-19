@@ -45,6 +45,10 @@
 
         <dependency>
             <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-authentication-interfaces</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
             <artifactId>commons-data-transfer</artifactId>
         </dependency>
         <dependency>
@@ -54,6 +58,10 @@
         <dependency>
             <groupId>com.parabrisassi.sist</groupId>
             <artifactId>commons-error-handlers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.parabrisassi.sist</groupId>
+            <artifactId>commons-web-authentication</artifactId>
         </dependency>
         <dependency>
             <groupId>com.parabrisassi.sist</groupId>

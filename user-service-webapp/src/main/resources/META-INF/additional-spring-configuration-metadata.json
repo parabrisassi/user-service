@@ -6,17 +6,17 @@
       "description": "Description for custom.rolling-policy.max-history."
     },
     {
-      "name": "custom.security.jwt.key.public",
+      "name": "com.parabrisassi.sist.authentication.jwt.key.public",
       "type": "java.lang.String",
       "description": "Public key to verify JWTs. signatures."
     },
     {
-      "name": "custom.security.jwt.key.private",
+      "name": "com.parabrisassi.sist.authentication.jwt.key.private",
       "type": "java.lang.String",
       "description": "Private key to sign JWTs."
     },
     {
-      "name": "custom.security.jwt.duration",
+      "name": "com.parabrisassi.sist.authentication.jwt.duration",
       "type": "java.lang.Long",
       "description": "Amount of seconds the token will last."
     }

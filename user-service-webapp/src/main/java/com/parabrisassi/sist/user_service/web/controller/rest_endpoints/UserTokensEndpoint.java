@@ -1,11 +1,11 @@
 package com.parabrisassi.sist.user_service.web.controller.rest_endpoints;
 
+import com.parabrisassi.sist.commons.authentication.TokenData;
 import com.parabrisassi.sist.commons.config.JerseyController;
 import com.parabrisassi.sist.commons.data_transfer.annotations.PaginationParam;
 import com.parabrisassi.sist.commons.exceptions.IllegalParamValueException;
 import com.parabrisassi.sist.user_service.models.User;
 import com.parabrisassi.sist.user_service.services.AuthenticationTokenService;
-import com.parabrisassi.sist.user_service.services.AuthenticationTokenService.TokenData;
 import com.parabrisassi.sist.user_service.web.controller.dtos.entities.TokenDataDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
